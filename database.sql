@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS historique_appartenance (
     date_debut TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     date_fin TIMESTAMP NULL,
     echange_id INT NULL,
-    FOREIGN KEY (objet_id) REFERENCES objets(id),
+    FOREIGN KEY (objet_id) REFERENCES objets(id) ON DELETE CASCADE,
     FOREIGN KEY (utilisateur_id) REFERENCES utilisateurs(id),
     FOREIGN KEY (echange_id) REFERENCES echanges(id)
 );

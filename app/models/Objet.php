@@ -3,9 +3,11 @@ require_once __DIR__ . '/../../config/database.php';
 
 class Objet {
     private $db;
+    private $lastDeleteError;
     
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
+        $this->lastDeleteError = null;
     }
     
     public function create($data) {
@@ -147,9 +149,47 @@ class Objet {
     }
     
     public function delete($id) {
-        $sql = "DELETE FROM objets WHERE id = :id";
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute([':id' => $id]);
+        $this->lastDeleteError = null;
+
+        try {
+            $this->db->beginTransaction();
+
+            // Ne pas supprimer un objet déjà impliqué dans un échange validé.
+            $sqlCountEchanges = "SELECT COUNT(*) FROM echanges WHERE objet1_id = :id OR objet2_id = :id";
+            $stmtCountEchanges = $this->db->prepare($sqlCountEchanges);
+            $stmtCountEchanges->execute([':id' => $id]);
+
+            if ((int) $stmtCountEchanges->fetchColumn() > 0) {
+                $this->db->rollBack();
+                $this->lastDeleteError = 'has_exchange';
+                return false;
+            }
+
+            $sqlDeleteHistorique = "DELETE FROM historique_appartenance WHERE objet_id = :id";
+            $stmtDeleteHistorique = $this->db->prepare($sqlDeleteHistorique);
+            $stmtDeleteHistorique->execute([':id' => $id]);
+
+            $sqlDeletePropositions = "DELETE FROM propositions WHERE objet_propose_id = :id OR objet_demande_id = :id";
+            $stmtDeletePropositions = $this->db->prepare($sqlDeletePropositions);
+            $stmtDeletePropositions->execute([':id' => $id]);
+
+            $sqlDeleteObjet = "DELETE FROM objets WHERE id = :id";
+            $stmtDeleteObjet = $this->db->prepare($sqlDeleteObjet);
+            $stmtDeleteObjet->execute([':id' => $id]);
+
+            $this->db->commit();
+            return true;
+        } catch (PDOException $e) {
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+            $this->lastDeleteError = 'db_error';
+            return false;
+        }
+    }
+
+    public function getLastDeleteError() {
+        return $this->lastDeleteError;
     }
     
     public function changerProprietaire($objetId, $nouveauProprietaireId, $echangeId) {

@@ -245,7 +245,12 @@ class ObjetController {
         if ($this->objetModel->delete($id)) {
             $_SESSION['success'] = "Objet supprimé avec succès !";
         } else {
-            $_SESSION['error'] = "Erreur lors de la suppression.";
+            $deleteError = $this->objetModel->getLastDeleteError();
+            if ($deleteError === 'has_exchange') {
+                $_SESSION['error'] = "Impossible de supprimer un objet déjà impliqué dans un échange.";
+            } else {
+                $_SESSION['error'] = "Erreur lors de la suppression.";
+            }
         }
         
         Flight::redirect('/mes-objets');
