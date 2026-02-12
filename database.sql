@@ -110,6 +110,11 @@ CREATE TABLE IF NOT EXISTS historique_appartenance (
 INSERT INTO admins (username, password) VALUES 
 ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 
+-- Autre admin (password: admin)
+INSERT INTO admins (username, password) VALUES 
+('admin2', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.ogA4LZLJ8Hn7Kp6e
+');
+
 -- Catégories
 INSERT INTO categories (nom, description) VALUES
 ('Vêtements', 'Vêtements pour hommes, femmes et enfants'),

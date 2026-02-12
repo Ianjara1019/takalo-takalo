@@ -186,8 +186,7 @@ takalo-takalo/
 
 ## Développeurs
 
-**Nom :** [VOTRE_NOM] - **N° ETU :** [VOTRE_NUMERO]
-**Nom :** [VOTRE_NOM] - **N° ETU :** [VOTRE_NUMERO]
+**Nom :** [RAHARINJATOVO Ianjara Nomena] - **N° ETU :** [4011]
 
 ## Liens
 
@@ -196,4 +195,4 @@ takalo-takalo/
 
 ## Licence
 
-Projet académique - P18/P5DS - Février 2026
+Février 2026
