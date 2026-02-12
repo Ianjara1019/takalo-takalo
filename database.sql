@@ -108,12 +108,11 @@ CREATE TABLE IF NOT EXISTS historique_appartenance (
 
 -- Admin par défaut (password: admin123)
 INSERT INTO admins (username, password) VALUES 
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
+('admin', '$2y$12$JvEqtgWmCqILV4340nC1j.OY9x5tMfBUFkQuKELEO77juFIaVZBUy');
 
 -- Autre admin (password: admin)
 INSERT INTO admins (username, password) VALUES 
-('admin2', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.ogA4LZLJ8Hn7Kp6e
-');
+('admin2', '$2y$12$hNnWKcKp9jl6HkZwFbYq3.wtbj1nzDInmAwGDtkWfyCiIFfsEfTNK');
 
 -- Catégories
 INSERT INTO categories (nom, description) VALUES
