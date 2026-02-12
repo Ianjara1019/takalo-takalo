@@ -30,8 +30,25 @@
                     
                     <div class="mb-3">
                         <label for="password" class="form-label">Mot de passe *</label>
-                        <input type="password" class="form-control" id="password" name="password" required minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}">
-                        <small class="text-muted">8+ caractères avec majuscule, minuscule, chiffre et caractère spécial.</small>
+
+                        <div class="input-group">
+                            <input type="password"
+                                class="form-control"
+                                id="password"
+                                name="password"
+                                required
+                                minlength="8"
+                                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}">
+
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+
+                        <small class="text-muted">
+                            8+ caractères avec majuscule, minuscule, chiffre et caractère spécial.
+                        </small>
+
                         <div class="invalid-feedback" data-field-error="password"></div>
                     </div>
                     
@@ -146,4 +163,18 @@
         }
     });
 })();
+</script>
+<script>
+document.getElementById("togglePassword").addEventListener("click", function () {
+    const passwordInput = document.getElementById("password");
+    const icon = this.querySelector("i");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        icon.classList.replace("bi-eye", "bi-eye-slash");
+    } else {
+        passwordInput.type = "password";
+        icon.classList.replace("bi-eye-slash", "bi-eye");
+    }
+});
 </script>

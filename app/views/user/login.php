@@ -16,9 +16,18 @@
                     
                     <div class="mb-3">
                         <label for="password" class="form-label">Mot de passe</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+
                         <div class="invalid-feedback" data-field-error="password"></div>
                     </div>
+
                     
                     <div class="d-grid">
                         <button type="submit" class="btn btn-success" id="login-submit">
@@ -124,3 +133,18 @@
     });
 })();
 </script>
+<script>
+document.getElementById("togglePassword").addEventListener("click", function () {
+    const passwordInput = document.getElementById("password");
+    const icon = this.querySelector("i");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        icon.classList.replace("bi-eye", "bi-eye-slash");
+    } else {
+        passwordInput.type = "password";
+        icon.classList.replace("bi-eye-slash", "bi-eye");
+    }
+});
+</script>
+
