@@ -2,21 +2,42 @@
     <div class="col-12">
         <div id="mes-objets-feedback"></div>
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2><i class="bi bi-box-seam"></i> Mes objets</h2>
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ajouterObjetModal">
-                <i class="bi bi-plus-circle"></i> Ajouter un objet
-            </button>
+            <h2><i class="bi bi-box-seam"></i> 
+                <?php if (isset($mode) && $mode == 'exchange'): ?>
+                    Objets échangeables pour "<?= htmlspecialchars($objet_selectionne['titre']) ?>" (±<?= $percent ?>%)
+                <?php else: ?>
+                    Mes objets
+                <?php endif; ?>
+            </h2>
+            <?php if (isset($mode) && $mode == 'exchange'): ?>
+                <a href="/mes-objets" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Retour à mes objets
+                </a>
+            <?php else: ?>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ajouterObjetModal">
+                    <i class="bi bi-plus-circle"></i> Ajouter un objet
+                </button>
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
-<?php if (empty($objets)): ?>
+<?php 
+$displayObjets = isset($mode) && $mode == 'exchange' ? $objets_echange : $objets;
+?>
+
+<?php if (empty($displayObjets)): ?>
     <div class="alert alert-info">
-        <i class="bi bi-info-circle"></i> Vous n'avez pas encore d'objets. Commencez par en ajouter !
+        <i class="bi bi-info-circle"></i> 
+        <?php if (isset($mode) && $mode == 'exchange'): ?>
+            Aucun objet disponible dans cette fourchette de prix.
+        <?php else: ?>
+            Vous n'avez pas encore d'objets. Commencez par en ajouter !
+        <?php endif; ?>
     </div>
 <?php else: ?>
     <div class="row">
-        <?php foreach ($objets as $objet): ?>
+        <?php foreach ($displayObjets as $objet): ?>
         <div class="col-md-6 col-lg-4 mb-4">
             <div class="card h-100">
                 <?php if ($objet['photo_principale']): ?>
@@ -36,22 +57,44 @@
                     <p class="card-text">
                         <span class="badge bg-info"><?= htmlspecialchars($objet['categorie_nom']) ?></span>
                         <span class="text-success fw-bold"><?= number_format($objet['prix_estimatif'], 0, ',', ' ') ?> Ar</span>
+                        <?php if (isset($mode) && $mode == 'exchange'): ?>
+                            <span class="badge bg-<?= $objet['prix_diff_percent'] >= 0 ? 'warning' : 'info' ?>">
+                                <?= $objet['prix_diff_sign'] ?><?= $objet['prix_diff_percent'] ?>%
+                            </span>
+                        <?php endif; ?>
                     </p>
                 </div>
                 
                 <div class="card-footer bg-transparent">
                     <div class="btn-group w-100" role="group">
-                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modifierObjetModal<?= $objet['id'] ?>">
-                            <i class="bi bi-pencil"></i> Modifier
-                        </button>
-                        <a href="/objet/supprimer/<?= $objet['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet objet ?')">
-                            <i class="bi bi-trash"></i> Supprimer
-                        </a>
+                        <?php if (isset($mode) && $mode == 'exchange'): ?>
+                            <a href="/objet/<?= $objet['id'] ?>?proposer=<?= $objet_selectionne['id'] ?>" class="btn btn-sm btn-success">
+                                <i class="bi bi-arrow-left-right"></i> Échanger
+                            </a>
+                            <a href="/objet/<?= $objet['id'] ?>" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i> Voir détails
+                            </a>
+                        <?php else: ?>
+                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modifierObjetModal<?= $objet['id'] ?>">
+                                <i class="bi bi-pencil"></i> Modifier
+                            </button>
+                            <a href="/objet/supprimer/<?= $objet['id'] ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet objet ?')">
+                                <i class="bi bi-trash"></i> Supprimer
+                            </a>
+                        <?php endif; ?>
                     </div>
+                    <?php if (!isset($mode) || $mode != 'exchange'): ?>
+                    <div class="mt-2 text-center">
+                        <small class="text-muted">Filtres par prix :</small>
+                        <a href="/mes-objets?objet_id=<?= $objet['id'] ?>&percent=10" class="btn btn-sm btn-outline-secondary ms-1">±10%</a>
+                        <a href="/mes-objets?objet_id=<?= $objet['id'] ?>&percent=20" class="btn btn-sm btn-outline-secondary">±20%</a>
+                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
         
+        <?php if (!isset($mode) || $mode != 'exchange'): ?>
         <!-- Modal Modifier -->
         <div class="modal fade" id="modifierObjetModal<?= $objet['id'] ?>" tabindex="-1">
             <div class="modal-dialog">
@@ -97,6 +140,8 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
+        
         <?php endforeach; ?>
     </div>
 <?php endif; ?>

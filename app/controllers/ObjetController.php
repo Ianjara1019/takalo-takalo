@@ -26,11 +26,46 @@ class ObjetController {
             return;
         }
         
-        $objets = $this->objetModel->getByUtilisateur($_SESSION['user_id']);
         $categories = $this->categorieModel->getAll();
         
-        Flight::render('user/mes_objets', ['objets' => $objets, 'categories' => $categories], 'content');
-        Flight::render('layouts/main', ['title' => 'Mes objets']);
+        if (isset($_GET['objet_id']) && isset($_GET['percent'])) {
+            $objetId = (int)$_GET['objet_id'];
+            $percent = (int)$_GET['percent'];
+            
+            // Vérifier que l'objet appartient à l'utilisateur
+            $objet = $this->objetModel->getById($objetId);
+            if (!$objet || $objet['utilisateur_id'] != $_SESSION['user_id']) {
+                Flight::redirect('/mes-objets');
+                return;
+            }
+            
+            $prix = $objet['prix_estimatif'];
+            $min = $prix * (1 - $percent / 100);
+            $max = $prix * (1 + $percent / 100);
+            
+            $objetsEchange = $this->objetModel->getByPrixInterval($min, $max, $_SESSION['user_id']);
+            
+            // Calculer la différence de prix pour chaque objet
+            foreach ($objetsEchange as &$o) {
+                $diff = (($o['prix_estimatif'] - $prix) / $prix) * 100;
+                $o['prix_diff_percent'] = round($diff, 1);
+                $o['prix_diff_sign'] = $diff >= 0 ? '+' : '';
+            }
+            
+            Flight::render('user/mes_objets', [
+                'objets' => [], // Pas d'objets personnels en mode échange
+                'categories' => $categories,
+                'mode' => 'exchange',
+                'objet_selectionne' => $objet,
+                'objets_echange' => $objetsEchange,
+                'percent' => $percent
+            ], 'content');
+            Flight::render('layouts/main', ['title' => 'Objets échangeables - ' . $percent . '%']);
+        } else {
+            $objets = $this->objetModel->getByUtilisateur($_SESSION['user_id']);
+            Flight::render('user/mes_objets', ['objets' => $objets, 'categories' => $categories], 'content');
+            Flight::render('layouts/main', ['title' => 'Mes objets']);
+        }
     }
     
     public function listeObjets() {

@@ -63,6 +63,25 @@ class Objet {
         return $stmt->fetchAll();
     }
     
+    public function getByPrixInterval($min, $max, $excludeUserId) {
+        $sql = "SELECT o.*, c.nom as categorie_nom, u.nom, u.prenom,
+                (SELECT nom_fichier FROM photos_objets WHERE objet_id = o.id AND is_principale = 1 LIMIT 1) as photo_principale
+                FROM objets o 
+                LEFT JOIN categories c ON o.categorie_id = c.id
+                LEFT JOIN utilisateurs u ON o.utilisateur_id = u.id
+                WHERE o.utilisateur_id != :exclude_user_id AND o.statut = 'disponible' 
+                AND o.prix_estimatif BETWEEN :min AND :max
+                ORDER BY o.created_at DESC";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':exclude_user_id' => $excludeUserId,
+            ':min' => $min,
+            ':max' => $max
+        ]);
+        return $stmt->fetchAll();
+    }
+    
     public function getById($id) {
         $sql = "SELECT o.*, c.nom as categorie_nom, u.nom, u.prenom, u.id as proprietaire_id
                 FROM objets o 

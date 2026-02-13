@@ -101,13 +101,18 @@
                         <label class="form-label">Choisissez un de vos objets *</label>
                         <select class="form-select" name="objet_propose_id" required>
                             <option value="">-- Sélectionnez un objet --</option>
-                            <?php foreach ($mesObjets as $monObjet): ?>
-                                <?php if ($monObjet['statut'] == 'disponible'): ?>
-                                <option value="<?= $monObjet['id'] ?>">
+                            <?php 
+                            $proposerId = $_GET['proposer'] ?? null;
+                            foreach ($mesObjets as $monObjet): 
+                                if ($monObjet['statut'] == 'disponible'):
+                            ?>
+                                <option value="<?= $monObjet['id'] ?>" <?= $proposerId == $monObjet['id'] ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($monObjet['titre']) ?> (<?= number_format($monObjet['prix_estimatif'], 0, ',', ' ') ?> Ar)
                                 </option>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                            <?php 
+                                endif;
+                            endforeach; 
+                            ?>
                         </select>
                         <div class="invalid-feedback" data-field-error="objet_propose_id"></div>
                     </div>

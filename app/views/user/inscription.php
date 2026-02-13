@@ -12,20 +12,20 @@
                         <div class="col-md-6 mb-3">
                             <label for="nom" class="form-label">Nom *</label>
                             <input type="text" class="form-control" id="nom" name="nom" required>
-                            <div class="invalid-feedback" data-field-error="nom"></div>
+                            <div class="text-danger small mt-1 d-none" data-field-error="nom"></div>
                         </div>
                         
                         <div class="col-md-6 mb-3">
                             <label for="prenom" class="form-label">Prénom *</label>
                             <input type="text" class="form-control" id="prenom" name="prenom" required>
-                            <div class="invalid-feedback" data-field-error="prenom"></div>
+                            <div class="text-danger small mt-1 d-none" data-field-error="prenom"></div>
                         </div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="email" class="form-label">Email *</label>
                         <input type="email" class="form-control" id="email" name="email" required>
-                        <div class="invalid-feedback" data-field-error="email"></div>
+                        <div class="text-danger small mt-1 d-none" data-field-error="email"></div>
                     </div>
                     
                     <div class="mb-3">
@@ -49,19 +49,19 @@
                             8+ caractères avec majuscule, minuscule, chiffre et caractère spécial.
                         </small>
 
-                        <div class="invalid-feedback" data-field-error="password"></div>
+                        <div class="text-danger small mt-1 d-none" data-field-error="password"></div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="telephone" class="form-label">Téléphone</label>
                         <input type="text" class="form-control" id="telephone" name="telephone">
-                        <div class="invalid-feedback" data-field-error="telephone"></div>
+                        <div class="text-danger small mt-1 d-none" data-field-error="telephone"></div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="adresse" class="form-label">Adresse</label>
                         <textarea class="form-control" id="adresse" name="adresse" rows="2"></textarea>
-                        <div class="invalid-feedback" data-field-error="adresse"></div>
+                        <div class="text-danger small mt-1 d-none" data-field-error="adresse"></div>
                     </div>
                     
                     <div class="d-grid">
@@ -94,8 +94,11 @@
 
     const clearFieldErrors = () => {
         form.querySelectorAll('.is-invalid').forEach((el) => el.classList.remove('is-invalid'));
+        form.querySelectorAll('.field-error').forEach((el) => el.classList.remove('field-error'));
         form.querySelectorAll('[data-field-error]').forEach((el) => {
             el.textContent = '';
+            el.classList.add('d-none');
+            el.classList.remove('d-block');
         });
     };
 
@@ -106,10 +109,13 @@
 
             if (input) {
                 input.classList.add('is-invalid');
+                input.classList.add('field-error');
             }
 
             if (errorBox) {
                 errorBox.textContent = message;
+                errorBox.classList.remove('d-none');
+                errorBox.classList.add('d-block');
             }
         });
     };
@@ -120,6 +126,7 @@
         feedback.innerHTML = '';
 
         if (!form.checkValidity()) {
+            // Laisser Bootstrap gérer la validation native
             form.classList.add('was-validated');
             return;
         }

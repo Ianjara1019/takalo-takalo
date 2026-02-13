@@ -128,10 +128,10 @@ INSERT INTO categories (nom, description) VALUES
 -- Utilisateurs de test (password: password123)
 INSERT INTO utilisateurs (nom, prenom, email, password, telephone, adresse) VALUES
 ('Weedman', 'Yuchang', 'weedman@gmail.com', '$2y$10$JoxAvksn89dM9jBMJLGoJeBdbTYYmMic3SF5uKPM.5dwp5FJUbqJm', '0341234567', 'Antananarivo'),
-('Rakoto', 'Jean', 'jean.rakoto@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0341234567', 'Antananarivo'),
-('Rabe', 'Marie', 'marie.rabe@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0349876543', 'Antsirabe'),
-('Randria', 'Paul', 'paul.randria@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0347654321', 'Fianarantsoa'),
-('Rasoa', 'Sophie', 'sophie.rasoa@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0345556666', 'Toamasina');
+('Rakoto', 'Jean', 'jean@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0341234567', 'Antananarivo'),
+('Rabe', 'Marie', 'marie@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0349876543', 'Antsirabe'),
+('Randria', 'Paul', 'paul@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0347654321', 'Fianarantsoa'),
+('Rasoa', 'Sophie', 'sophie@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0345556666', 'Toamasina');
 
 -- Objets de test
 INSERT INTO objets (utilisateur_id, categorie_id, titre, description, prix_estimatif, statut) VALUES
