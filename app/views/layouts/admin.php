@@ -91,8 +91,9 @@
         <div class="container text-center">
             <p class="mb-0">
                 <strong>Projet développé par :</strong><br>
-                <span class="badge bg-light text-dark">Nom: RAHARINJATOVO Ianjara Nomena - N° ETU: 4011</span>
-                <span class="badge bg-light text-dark">Nom: VOTRE_NOM - N° ETU: XXXX</span>
+                <span class="badge bg-primary">Nom: RAHARINJATOVO Ianjara Nomena - N° ETU: 4011</span>
+                <span class="badge bg-primary">Nom: HERITIANA Liantsoa Fabrice - N° ETU: 4075</span>
+                <span class="badge bg-primary">Nom: RAMAHARO Nomenjanahary Sandanirainy - N° ETU: 3917</span>
             </p>
             <p class="mt-2 mb-0 small">
                 &copy; 2026 Takalo-takalo - Administration

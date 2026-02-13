@@ -85,6 +85,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/inscription">Inscription</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/login">Administration</a>
+                    </li>
                 </ul>
                 <?php endif; ?>
             </div>
@@ -120,7 +123,8 @@
         <div class="container text-center">
             <p class="mb-0 text-muted">
                 <span class="badge bg-primary">Nom: RAHARINJATOVO Ianjara Nomena - N° ETU: 4011</span>
-                <span class="badge bg-primary">Nom: VOTRE_NOM - N° ETU: XXXX</span>
+                <span class="badge bg-primary">Nom: HERITIANA Liantsoa Fabrice - N° ETU: 4075</span>
+                <span class="badge bg-primary">Nom: RAMAHARO Nomenjanahary Sandanirainy - N° ETU: 3917</span>
             </p>
             <p class="mt-2 mb-0 text-muted small">
                 &copy; 2026 Takalo-takalo

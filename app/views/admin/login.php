@@ -25,6 +25,10 @@
             </div>
             <div class="card-footer text-center">
                 <small class="text-muted">Accès réservé aux administrateurs</small>
+                <br>
+                <a href="/" class="btn btn-link btn-sm mt-2">
+                    <i class="bi bi-arrow-left"></i> Retour à l'accueil
+                </a>
             </div>
         </div>
         

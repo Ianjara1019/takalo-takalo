@@ -127,6 +127,7 @@ INSERT INTO categories (nom, description) VALUES
 
 -- Utilisateurs de test (password: password123)
 INSERT INTO utilisateurs (nom, prenom, email, password, telephone, adresse) VALUES
+('Weedman', 'Yuchang', 'weedman@gmail.com', '$2y$10$JoxAvksn89dM9jBMJLGoJeBdbTYYmMic3SF5uKPM.5dwp5FJUbqJm', '0341234567', 'Antananarivo'),
 ('Rakoto', 'Jean', 'jean.rakoto@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0341234567', 'Antananarivo'),
 ('Rabe', 'Marie', 'marie.rabe@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0349876543', 'Antsirabe'),
 ('Randria', 'Paul', 'paul.randria@email.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '0347654321', 'Fianarantsoa'),

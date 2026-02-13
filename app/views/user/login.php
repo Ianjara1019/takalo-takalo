@@ -43,8 +43,8 @@
         
         <div class="alert alert-info mt-3">
             <strong>Comptes de test :</strong><br>
-            Email: jean.rakoto@email.com<br>
-            Mot de passe: password123
+            Email: weedman@gmail.com<br>
+            Mot de passe: weedman123@O
         </div>
     </div>
 </div>
