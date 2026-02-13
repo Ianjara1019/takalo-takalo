@@ -1,6 +1,6 @@
 # TODO Projet Takalo-Takalo
 
-Mise a jour: 11/02/2026
+Mise a jour: 13/02/2026
 
 Objectif: chaque ligne de tache decrit explicitement ce qui est deja fait dans le code.
 
@@ -44,6 +44,7 @@ Objectif: chaque ligne de tache decrit explicitement ce qui est deja fait dans l
 | Mes objets | Modification objet deja fonctionnelle (`POST /objet/modifier/@id` + validation serveur) | 40 | 0 | 100 |
 | Mes objets | Soumission AJAX implementee pour ajout/modification (modales + `fetch` + JSON) | 35 | 0 | 100 |
 | Mes objets | Validation centralisee avec `FormValidator::validateObjetData` | 20 | 0 | 100 |
+| Mes objets | Filtres par intervalle de prix implementes (±10% et ±20% avec propositions d'echange) | 60 | 0 | 100 |
 | Mes objets | Suppression objet deja presente mais via route GET (a migrer en POST) | 30 | 20 | 33 |
 | Mes objets | Controle proprietaire deja implemente avant modifier/supprimer | 20 | 0 | 100 |
 
@@ -64,10 +65,20 @@ Objectif: chaque ligne de tache decrit explicitement ce qui est deja fait dans l
 
 | Module | Tache | Estimation (min) | Reste a faire (min) | Avancement (%) |
 |---|---|---:|---:|---:|
-| Administration | Login admin deja en place (`GET/POST /admin/login` + `Admin::login`) | 30 | 5 | 83 |
+| Administration | Login admin deja en place (`GET/POST /admin/login` + `Admin::login`) | 30 | 0 | 100 |
 | Administration | Dashboard deja branche (compteurs utilisateurs/objets/echanges/propositions/categories) | 45 | 10 | 78 |
 | Administration | Gestion categories deja fonctionnelle (liste/ajout/modif/suppression) | 50 | 15 | 70 |
+| Administration | Liens d'accessibilite ajoutes (navbar + page login admin) | 15 | 0 | 100 |
 | Administration | Suppression categorie encore en GET (a migrer en POST + CSRF) | 25 | 25 | 0 |
+
+## Module: Fonctionnalites recentes
+
+| Module | Tache | Estimation (min) | Reste a faire (min) | Avancement (%) |
+|---|---|---:|---:|---:|
+| Fonctionnalites recentes | Filtres par intervalle de prix (±10% et ±20%) implementes dans mes objets | 60 | 0 | 100 |
+| Fonctionnalites recentes | Propositions d'echange integre avec difference de prix affichee | 30 | 0 | 100 |
+| Fonctionnalites recentes | Liens d'accessibilite admin ajoutes (navbar + page login) | 15 | 0 | 100 |
+| Fonctionnalites recentes | Correction affichage erreurs AJAX dans formulaires | 20 | 0 | 100 |
 
 ## Module: Securite
 
@@ -75,7 +86,8 @@ Objectif: chaque ligne de tache decrit explicitement ce qui est deja fait dans l
 |---|---|---:|---:|---:|
 | Securite | Echappement HTML deja present dans la plupart des vues (`htmlspecialchars`) | 45 | 10 | 78 |
 | Securite | Protection CSRF non implementee sur formulaires/actions sensibles | 90 | 90 | 0 |
-| Securite | Validation stricte entree serveur renforcee (inscription/login/objets/propositions) via `FormValidator`, encore incomplete globalement | 60 | 15 | 75 |
+| Securite | Validation stricte entree serveur renforcee (inscription/login/objets/propositions) via `FormValidator`, encore incomplete globalement | 60 | 10 | 83 |
+| Securite | Affichage des erreurs AJAX corrige (probleme `novalidate` + `invalid-feedback`) | 20 | 0 | 100 |
 | Securite | Durcissement upload image incomplet (MIME/taille/extensions autorisees) | 75 | 60 | 20 |
 
 ## Module: Tests et documentation
